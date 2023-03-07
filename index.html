@@ -109,15 +109,14 @@
       
       renderer.render(scene, camera);
       
-      const torusTexture = new THREE.TextureLoader().load('seeds.jpeg');
+      
+      //bagel
+      const bagelTexture = new THREE.TextureLoader().load('seeds.jpeg');
       const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
-      const material = new THREE.MeshBasicMaterial( { map: torusTexture} )
-      const torus = new THREE.Mesh(geometry, material);
-     
+      const material = new THREE.MeshBasicMaterial( { map: bagelTexture} )
+      const bagel = new THREE.Mesh(geometry, material);
       
-      
-      
-      scene.add(torus)
+      scene.add(bagel)
       
       // lighting
       const pointLight = new THREE.PointLight(0xffffff);
@@ -196,9 +195,9 @@
       function animate() {
         requestAnimationFrame(animate);
         
-        torus.rotation.x += 0.01;
-        torus.rotation.y += 0.005;
-        torus.rotation.z += 0.01
+        bagel.rotation.x += 0.01;
+        bagel.rotation.y += 0.005;
+        bagel.rotation.z += 0.01
         
         renderer.render(scene, camera);
       }
