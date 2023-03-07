@@ -13,6 +13,10 @@
         top: 0;
         left: 0;
       }
+      
+      main {
+        position: absolute;
+      }
 	
     </style>
     
@@ -61,7 +65,7 @@
       
       function addStar() {
         const geometry = new THREE.SphereGeometry(0.25, 24, 24);
-        const material = new THREE.MeshStandardMaterial({color: 0xffffff});
+        const material = new THREE.MeshStandardMaterial({color: 0x000000});
         const star = new THREE.Mesh(geometry, material);
         
         const [x, y, z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread(100));
@@ -85,7 +89,39 @@
       );
       
       scene.add(cheese);
+      
+      
+      const philTexture = new THREE.TextureLoader().load('square-cheese.jpg');
+      
+      const phil = new THREE.Mesh(
+      	new THREE.SphereGeometry(3, 32, 32),
+        new THREE.MeshStandardMaterial( {
+          map: philTexture,
+        })
+      )
 
+      scene.add(phil);
+      
+      phil.position.z = 30;
+      phil.position.setX(-10);
+      
+      
+      function moveCamera() {
+        const t = document.body.getBoundingClientRect().top;
+        phil.rotation.x += 0.05;
+        phil.rotation.y += 0.075;
+        phil.rotation.z += 0.05
+        
+        cheese.rotation.y += 0.01;
+        cheese.rotation.z += 0.01;
+        
+        camera.position.z += t * -0.01;
+        camera.position.x = t * -0.0002;
+        camera.rotation.y = t * -0.0002;
+      }
+      
+      document.body.onscroll = moveCamera
+      
       
       function animate() {
         requestAnimationFrame(animate);
